@@ -1,3 +1,29 @@
-let dummyData = [0, 20, 23, 2440, 4124, 121, 404];
-
-d3.select('#chart').selectAll('div').data(dummyData).enter().append('div').text(function (d) { return d });
+let useOfForceData = [];
+d3.csv('./data/use-of-force.csv').then(function (data) {
+    useOfForceData = data;
+    let breakDown = {};
+    data.forEach(eachItem => {
+        let race = eachItem['Subject_Race'];
+        if (breakDown[race] !== undefined) {
+            let raceCount = breakDown[race];
+            breakDown[race] = raceCount + 1;
+        }
+        else {
+            breakDown[race] = 1;
+        }
+    });
+    console.log(Object.entries(breakDown));
+    let scale = d3.scaleLinear().domain([105, 6058]).range([0, 600]);
+    d3.select('#chart')
+        .selectAll('div')
+        .data(Object.entries(breakDown))
+        .enter()
+        .append('li')
+        .html(function (d) { 
+            return '<span>' + d[0] + "(" + d[1] + ")" + '</span>';
+        })
+        .style("width", function (d) {
+            return scale(d[1]) + 'px';
+        })
+        .style("background", (d) => 'red')
+});

@@ -1,0 +1,8 @@
+li{
+    margin-bottom: 1em;
+}
+
+li span {
+    position: absolute;
+    min-width: 800px;
+}
