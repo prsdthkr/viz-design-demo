@@ -130,11 +130,17 @@ d3.csv("./data/use-of-force.csv").then(
             .attr("class", "g")
             .attr("transform", function (d) { return "translate(" + x0(d.type) + ",0)"; })
             .style("margin", (d) => '0 3px');
+        
+        var tooltip = d3.select("body")
+            .append("div")
+            .style("position", "absolute")
+            .style("z-index", "10")
+            .style("visibility", "hidden")
 
         project_stackedbar.selectAll("rect")
             .data(function (d) { return d.columnDetails; })
             .enter().append("rect")
-            .attr("width", x1.bandwidth()- 10)
+            .attr("width", x1.bandwidth() - 10)
             .attr("x", function (d) {
                 return x1(d.column);
             })
@@ -147,6 +153,11 @@ d3.csv("./data/use-of-force.csv").then(
             .style("fill", function (d) {
                 return color(d.name);
             })
+            .on("mouseover", function (d) {
+                return tooltip.style("visibility", "visible").text('Incidents: ' + d.yEnd)
+            })
+            .on("mousemove", function () { return tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px"); })
+            .on("mouseout", function () { return tooltip.style("visibility", "hidden"); });
 
         var legend = svg.selectAll(".legend")
             .data(columnHeaders.slice().reverse())
