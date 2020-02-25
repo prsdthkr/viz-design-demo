@@ -23,7 +23,7 @@ function flatten(mapEntry, flatMap) {
     })
 }
 
-d3.csv("/data/use-of-force.csv")
+d3.csv("./data/use-of-force.csv")
     .row(function (d) {
         return { sector: d.Sector, type: d.Incident_Type };
     })
