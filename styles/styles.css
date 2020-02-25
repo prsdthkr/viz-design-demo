@@ -1,5 +1,12 @@
+.facts-ctr{
+    padding: 0 1em;
+}
 body{
       font-family: helvetica !important;
+}
+.active{
+    text-decoration: none !important;
+    border-bottom: 7px solid blue !important;
 }
 
 .ex1-legend ul {
