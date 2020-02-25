@@ -1,5 +1,5 @@
 var metricName = "Incidents";
-d3.csv("/data/use-of-force.csv")
+d3.csv("./data/use-of-force.csv")
     .row(function (d) {
         let dateArr = d.Occured_date_time.split("-");
         let yearMonth = dateArr[0] + "-" + dateArr[1];
