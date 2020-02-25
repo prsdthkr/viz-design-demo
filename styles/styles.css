@@ -1,3 +1,31 @@
+body{
+      font-family: helvetica !important;
+}
+
+.ex1-legend ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 2;
+    overflow: hidden;
+  }
+  
+.ex1-legend li {
+    float: left;
+  }
+
+  .ex1-legend .white {
+      background-color: #98abc5;
+      width: 60px;
+      /* height: 27px; */
+      text-align: center;
+  }
+
+
+.legend-chip p {
+    width: 100%;
+    padding: 3px 1px;
+}
+
 li{
     margin-bottom: 1em;
 }
@@ -5,4 +33,17 @@ li{
 li span {
     position: absolute;
     min-width: 800px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+nav li {
+    margin-bottom: 1em;
+    display: flex;
+    margin: 1em;
 }

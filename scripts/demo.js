@@ -1,4 +1,3 @@
-let useOfForceData = [];
 d3.csv('./data/use-of-force.csv').then(function (data) {
     useOfForceData = data;
     let breakDown = {};
@@ -12,9 +11,8 @@ d3.csv('./data/use-of-force.csv').then(function (data) {
             breakDown[race] = 1;
         }
     });
-    console.log(Object.entries(breakDown));
     let scale = d3.scaleLinear().domain([105, 6058]).range([0, 600]);
-    d3.select('#chart')
+    d3.select('#demo')
         .selectAll('div')
         .data(Object.entries(breakDown))
         .enter()
