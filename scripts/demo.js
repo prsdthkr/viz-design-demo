@@ -25,6 +25,7 @@ d3.csv('./data/use-of-force.csv').then(function (data) {
     // Declaratively manipulate the DOM
     // ======================
     d3.select('#demo')
+        .selectAll('div')
         .data(Object.entries(breakDown))
         .enter()
         .append('li')
