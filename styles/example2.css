@@ -34,9 +34,8 @@
         stroke-width: 1.5px;
         clip-path: url(#clip);
     }
-
     #metric-modal .metric-chart path.area {
-        fill: rgb(226, 98, 98);
+        fill: #e26262;
         /* CB default, changed in each theme */
         opacity: 0.6;
         clip-path: url(#clip);
