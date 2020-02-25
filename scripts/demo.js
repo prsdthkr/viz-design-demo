@@ -1,5 +1,8 @@
 d3.csv('./data/use-of-force.csv').then(function (data) {
-    useOfForceData = data;
+
+    // ======================
+    // Transform data to desired structure for visualization
+    // ======================
     let breakDown = {};
     data.forEach(eachItem => {
         let race = eachItem['Subject_Race'];
@@ -11,13 +14,21 @@ d3.csv('./data/use-of-force.csv').then(function (data) {
             breakDown[race] = 1;
         }
     });
+
+    // ======================
+    // Set the scale of your graph
+    // https://github.com/d3/d3/blob/master/API.md
+    // ======================
     let scale = d3.scaleLinear().domain([105, 6058]).range([0, 600]);
+
+    // ======================
+    // Declaratively manipulate the DOM
+    // ======================
     d3.select('#demo')
-        .selectAll('div')
         .data(Object.entries(breakDown))
         .enter()
         .append('li')
-        .html(function (d) { 
+        .html(function (d) {
             return '<span>' + d[0] + "(" + d[1] + ")" + '</span>';
         })
         .style("width", function (d) {
