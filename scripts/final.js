@@ -25,7 +25,7 @@ const selectStateG = (ABBR) => {
 const getAtt = function (ABBR, key) {
     if (!ABBR) return;
     let val = selectStateRect(ABBR).attr(key);
-    return val;
+    return val ? val : 0;
 };
 
 const setAtt = function (ABBR, key, value) {
