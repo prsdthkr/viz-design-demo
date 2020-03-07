@@ -57,7 +57,7 @@ const setAtt = function (ABBR, key, value) {
     selectStateRect(ABBR).attr(key, value);
 };
 window.onload = function () {
-    d3.csv('data/rich-size-of-communities.csv', function (d) {
+    d3.csv('data/rich-size-of-communities-2.csv', function (d) {
         d.forEach(element => {
             // console.log(element);
             const ABBR = element['Abr.'];
@@ -65,10 +65,11 @@ window.onload = function () {
             const two15 = float(element['2015 charges']);
             const two16 = float(element['2016 charges']);
             const two17 = float(element['2017 charges']);
+            const percentInc = float(element['Percent Incidents']);
             const avgRate = (two15 + two16 + two17) * 100 / 3;
             if (!ABBR) return;
 
-
+            // console.log('percent yall', element['Percent Incidents']);
 
             //placement calculations
             const outThreshold = 30;
@@ -152,14 +153,14 @@ window.onload = function () {
                 .attr('y', percentY)
                 .attr('x', percentX)
                 .attr('font-size', percentFontSize)
-                .text(avgRate.toFixed(2) + '%');
+                .text(percentInc.toFixed(2) + '%');
 
-            var greenScale = d3.scale.linear().domain([21, 37])
+            var greenScale = d3.scale.linear().domain([0.054285714, 1.959574468])
                 .range(["#13532e", "#2ecc71"]);
-            var redScale = d3.scale.linear().domain([27, 39])
-                .range(["#ffaba2", "#be1c0a"]);
+            var redScale = d3.scale.linear().domain([0.157777778, 3.443589744])
+                .range(["#ffccc7", "#b51200"]);
             const colorScale = element.Legislation === 'No' ? redScale : greenScale;
-            setAtt(ABBR, 'fill', colorScale(avgRate));
+            setAtt(ABBR, 'fill', colorScale(percentInc));
         });
     })
 };

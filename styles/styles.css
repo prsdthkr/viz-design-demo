@@ -1,3 +1,17 @@
+.color-pal {
+    width  : 20px;
+    height : 20px;
+    display: inline-block;
+}
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
 .state-tile-ctr {
     cursor: none;
 }
