@@ -1,3 +1,20 @@
+footer {
+    background: #333;
+    color     : white;
+    text-align: center;
+    margin-top: 200px;
+    height    : 100px;
+    padding   : 3em;
+}
+
+footer a {
+    color: white;
+}
+
+footer a:hover {
+    color: white;
+}
+
 .custom-article {
     margin-top: 3em;
 }
