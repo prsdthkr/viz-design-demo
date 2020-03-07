@@ -4,6 +4,20 @@
     display: inline-block;
 }
 
+.color-grad {
+    width  : 200px;
+    height : 20px;
+    display: inline-block;
+}
+
+.red-grad {
+    background: linear-gradient(to right, #13532e, #2ecc71);
+}
+
+.green-grad {
+    background: linear-gradient(to right, #ffccc7, #b51200);
+}
+
 .red {
     background-color: red;
 }

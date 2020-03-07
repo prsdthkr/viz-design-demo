@@ -156,9 +156,9 @@ window.onload = function () {
                 .text(percentInc.toFixed(2) + '%');
 
             var greenScale = d3.scale.linear().domain([0.054285714, 1.959574468])
-                .range(["#13532e", "#2ecc71"]);
+                .range(["#13532e", "#2ecc71"]); //dark green > light
             var redScale = d3.scale.linear().domain([0.157777778, 3.443589744])
-                .range(["#ffccc7", "#b51200"]);
+                .range(["#ffccc7", "#b51200"]); //light red > dark
             const colorScale = element.Legislation === 'No' ? redScale : greenScale;
             setAtt(ABBR, 'fill', colorScale(percentInc));
         });
