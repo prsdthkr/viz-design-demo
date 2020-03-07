@@ -1,3 +1,7 @@
+.custom-article {
+    margin-top: 3em;
+}
+
 .color-pal {
     width  : 20px;
     height : 20px;
@@ -43,7 +47,7 @@
 }
 
 body {
-    font-family: helvetica !important;
+    font-family: georgia, helvetica, 'Times New Roman', Times, serif !important;
 }
 
 .active {
