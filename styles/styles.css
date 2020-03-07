@@ -1,3 +1,10 @@
+.abr-li {
+    float      : left;
+    display    : inline-block;
+    margin     : 4px 10px;
+    white-space: inherit;
+}
+
 footer {
     background: #333;
     color     : white;

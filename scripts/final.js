@@ -57,112 +57,124 @@ const setAtt = function (ABBR, key, value) {
     selectStateRect(ABBR).attr(key, value);
 };
 window.onload = function () {
-    d3.csv('data/rich-size-of-communities-2.csv', function (d) {
-        d.forEach(element => {
-            // console.log(element);
-            const ABBR = element['Abr.'];
-            const communitySize = element['Community'];
-            const two15 = float(element['2015 charges']);
-            const two16 = float(element['2016 charges']);
-            const two17 = float(element['2017 charges']);
-            const percentInc = float(element['Percent Incidents']);
-            const avgRate = (two15 + two16 + two17) * 100 / 3;
-            if (!ABBR) return;
+    d3.json('data/states.json', function (sd) {
+        console.log('states', Object.entries(sd));
 
-            // console.log('percent yall', element['Percent Incidents']);
+        d3.select('#statesRef')
+            .selectAll('li')
+            .data(Object.entries(sd))
+            .enter()
+            .append('li')
+            .attr('class', 'abr-li')
+            .html(d => d[0] + ":" + d[1]);
 
-            //placement calculations
-            const outThreshold = 30;
-            const tileWidth = getAtt(ABBR, 'width');
-            const tileHeight = getAtt(ABBR, 'height');
-            const tileY = int(getAtt(ABBR, 'y'));
-            const tileX = int(getAtt(ABBR, 'x'));
+        d3.csv('data/rich-size-of-communities-2.csv', function (d) {
+            d.forEach(element => {
+                // console.log(element);
+                const ABBR = element['Abr.'];
+                const communitySize = element['Community'];
+                const two15 = float(element['2015 charges']);
+                const two16 = float(element['2016 charges']);
+                const two17 = float(element['2017 charges']);
+                const percentInc = float(element['Percent Incidents']);
+                const avgRate = (two15 + two16 + two17) * 100 / 3;
+                if (!ABBR) return;
 
+                // console.log('percent yall', element['Percent Incidents']);
 
-            //render outside tile?
-            let communitySizeY = center(ABBR, 'y', 15);
-            let communitySizeX = rightEdge(ABBR, 'x', 10);
-            let communityFontSize = '12px';
-
-
-            let stateAbrY = center(ABBR, 'y');
-            let stateAbrX = communitySizeX;
-            const abrFontSize = '20px'
-
-
-            let percentY = center(ABBR, 'y', 30);
-            let percentX = communitySizeX;
-            const percentFontSize = '12px'
+                //placement calculations
+                const outThreshold = 30;
+                const tileWidth = getAtt(ABBR, 'width');
+                const tileHeight = getAtt(ABBR, 'height');
+                const tileY = int(getAtt(ABBR, 'y'));
+                const tileX = int(getAtt(ABBR, 'x'));
 
 
-            //render inside tile?
-            const fontScale = d3.scale.linear().domain([1194000, 131000])
-                .range([80, 12]);
-            const leftPadding = 5;
-
-            if (int(tileWidth) >= outThreshold + leftPadding) {
-                const leftMargin = tileX + leftPadding;
-
-                const stateAbrFontOffset = pixelToNumber(abrFontSize);
-                stateAbrY = tileY + stateAbrFontOffset;
-                stateAbrX = leftMargin;
-
-                communityFontSize = getFontSize(fontScale, communitySize);
-                const fontOffset = fontScale(int(communitySize));
-                communitySizeY = stateAbrY + fontOffset;
-                communitySizeX = leftMargin;
-
-                const percentFontOffset = pixelToNumber(abrFontSize);
-                percentY = communitySizeY + percentFontOffset;
-                percentX = leftMargin;
-            }
+                //render outside tile?
+                let communitySizeY = center(ABBR, 'y', 15);
+                let communitySizeX = rightEdge(ABBR, 'x', 10);
+                let communityFontSize = '12px';
 
 
-            //render
+                let stateAbrY = center(ABBR, 'y');
+                let stateAbrX = communitySizeX;
+                const abrFontSize = '20px'
 
-            selectStateG(ABBR)
-                .data([element])
-                .attr('class', 'state-tile-ctr')
-                .on('mouseover', handleMouseOverRect)
-                .on('mouseout', handleMouseOutRect)
-            selectStateRect(ABBR)
-                .attr('class', 'state-tile')
 
-            //CA
-            selectStateG(ABBR)
-                .append("text")
-                .attr('fill', 'black')
-                .attr('y', stateAbrY)
-                .attr('x', stateAbrX)
-                .attr('font-size', abrFontSize)
-                .text(ABBR)
+                let percentY = center(ABBR, 'y', 30);
+                let percentX = communitySizeX;
+                const percentFontSize = '12px'
 
-            //1.19M
-            selectStateG(ABBR)
-                .append("text")
-                .attr('fill', 'black')
-                .attr('y', communitySizeY)
-                .attr('x', communitySizeX)
-                .attr('font-size', communityFontSize)
-                .text(nFormatter(communitySize, 2));
 
-            //27.67%
-            selectStateG(ABBR)
-                .append("text")
-                .attr('fill', 'black')
-                .attr('y', percentY)
-                .attr('x', percentX)
-                .attr('font-size', percentFontSize)
-                .text(percentInc.toFixed(2) + '%');
+                //render inside tile?
+                const fontScale = d3.scale.linear().domain([1194000, 131000])
+                    .range([80, 12]);
+                const leftPadding = 5;
 
-            var greenScale = d3.scale.linear().domain([0.054285714, 1.959574468])
-                .range(["#13532e", "#2ecc71"]); //dark green > light
-            var redScale = d3.scale.linear().domain([0.157777778, 3.443589744])
-                .range(["#ffccc7", "#b51200"]); //light red > dark
-            const colorScale = element.Legislation === 'No' ? redScale : greenScale;
-            setAtt(ABBR, 'fill', colorScale(percentInc));
-        });
-    })
+                if (int(tileWidth) >= outThreshold + leftPadding) {
+                    const leftMargin = tileX + leftPadding;
+
+                    const stateAbrFontOffset = pixelToNumber(abrFontSize);
+                    stateAbrY = tileY + stateAbrFontOffset;
+                    stateAbrX = leftMargin;
+
+                    communityFontSize = getFontSize(fontScale, communitySize);
+                    const fontOffset = fontScale(int(communitySize));
+                    communitySizeY = stateAbrY + fontOffset;
+                    communitySizeX = leftMargin;
+
+                    const percentFontOffset = pixelToNumber(abrFontSize);
+                    percentY = communitySizeY + percentFontOffset;
+                    percentX = leftMargin;
+                }
+
+
+                //render
+
+                selectStateG(ABBR)
+                    .data([element])
+                    .attr('class', 'state-tile-ctr')
+                    .on('mouseover', handleMouseOverRect)
+                    .on('mouseout', handleMouseOutRect)
+                selectStateRect(ABBR)
+                    .attr('class', 'state-tile')
+
+                //CA
+                selectStateG(ABBR)
+                    .append("text")
+                    .attr('fill', 'black')
+                    .attr('y', stateAbrY)
+                    .attr('x', stateAbrX)
+                    .attr('font-size', abrFontSize)
+                    .text(ABBR)
+
+                //1.19M
+                selectStateG(ABBR)
+                    .append("text")
+                    .attr('fill', 'black')
+                    .attr('y', communitySizeY)
+                    .attr('x', communitySizeX)
+                    .attr('font-size', communityFontSize)
+                    .text(nFormatter(communitySize, 2));
+
+                //27.67%
+                selectStateG(ABBR)
+                    .append("text")
+                    .attr('fill', 'black')
+                    .attr('y', percentY)
+                    .attr('x', percentX)
+                    .attr('font-size', percentFontSize)
+                    .text(percentInc.toFixed(2) + '%');
+
+                var greenScale = d3.scale.linear().domain([0.054285714, 1.959574468])
+                    .range(["#13532e", "#2ecc71"]); //dark green > light
+                var redScale = d3.scale.linear().domain([0.157777778, 3.443589744])
+                    .range(["#ffccc7", "#b51200"]); //light red > dark
+                const colorScale = element.Legislation === 'No' ? redScale : greenScale;
+                setAtt(ABBR, 'fill', colorScale(percentInc));
+            });
+        })
+    });
 };
 
 function handleMouseOverRect(d, i) {
