@@ -1,0 +1,150 @@
+.rect-stroke {
+    stroke-width: 3px;
+
+}
+
+.green-rect {
+    stroke: #13552e;
+}
+
+.red-rect {
+    stroke          : #4d1812;
+    stroke-dasharray: 5 3;
+}
+
+#statesRef {
+    margin-left: -50px;
+}
+
+.abr-li {
+    float      : left;
+    display    : inline-block;
+    margin     : 4px 10px;
+    white-space: inherit;
+}
+
+footer {
+    background: #333;
+    color     : white;
+    text-align: center;
+    margin-top: 200px;
+    height    : 100px;
+    padding   : 3em;
+}
+
+footer a {
+    color: white;
+}
+
+footer a:hover {
+    color: white;
+}
+
+.custom-article {
+    margin-top: 3em;
+}
+
+.color-pal {
+    width  : 20px;
+    height : 20px;
+    display: inline-block;
+}
+
+.color-grad {
+    width  : 200px;
+    height : 20px;
+    display: inline-block;
+}
+
+.red-grad {
+    background: linear-gradient(to right, #13532e, #2ecc71);
+}
+
+.green-grad {
+    background: linear-gradient(to right, #ffccc7, #b51200);
+}
+
+.red {
+    background-color: #c0392b;
+    border          : 5px dashed #750c00;
+}
+
+.green {
+    background-color: #27ae60;
+}
+
+.state-tile-ctr {
+    cursor: none;
+}
+
+.darkmode {
+    background-color: rgb(255, 255, 255);
+}
+
+.map-container {
+    width: 50vw;
+}
+
+.facts-ctr {
+    padding: 0 1em;
+}
+
+body {
+    font-family: georgia, helvetica, 'Times New Roman', Times, serif !important;
+}
+
+.active {
+    text-decoration: none !important;
+    border-bottom  : 7px solid blue !important;
+}
+
+.ex1-legend ul {
+    list-style-type: none;
+    margin         : 0;
+    padding-left   : 2;
+    overflow       : hidden;
+}
+
+.ex1-legend li {
+    float: left;
+}
+
+.ex1-legend .white {
+    background-color: #98abc5;
+    width           : 60px;
+    /* height       : 27px; */
+    text-align      : center;
+}
+
+
+.legend-chip p {
+    width  : 100%;
+    padding: 3px 1px;
+}
+
+#demo li {
+    line-height: 2em;
+}
+
+li {
+    margin-bottom: 1em;
+}
+
+li span {
+    position : absolute;
+    min-width: 800px;
+    padding  : 0 1em;
+}
+
+nav ul {
+    display        : flex;
+    justify-content: flex-start;
+    align-items    : stretch;
+    align-content  : stretch;
+}
+
+nav li {
+    margin-bottom: 1em;
+    display      : flex;
+    margin       : 1em;
+}

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Exploring Equality</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles/styles-2.css">
+    <link rel="icon" type="image/png" href="./d3.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body class="">
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-10">
+                <article class="container custom-article">
+                    <h1>
+                        🏳️‍🌈 <br>Visualizing LGBTQIA+ communities in USA, their explicit protection by
+                        law,
+                        discrimination
+                        charges
+                        in the employment sector for the years
+                        2015-2017
+                    </h1>
+                    <h2>Sources</h2>
+                    <ul>
+                        <li>
+                            <a href="https://www.gallup.com/174155/gallup-daily-tracking-methodology.aspx">Gallup Daily
+                                Tracking Survey</a>: to estimate the number of LGBT people in the labor force in each
+                            state
+                        </li>
+                        <li>
+                            <a href="http://www.lgbtmap.org/equality-maps/non_discrimination_laws">Movement Advancement
+                                Project</a>: to determine the number of LGBT people in the labor force protected and not
+                            protected under current
+                            state statutes
+                        </li>
+                        <li>
+                            <a href="https://www1.eeoc.gov/eeoc/statistics/enforcement/charges_by_state.cfm#centercol">
+                                U.S.
+                                Equal
+                                Employment Opportunity Commision (EEOC)</a>: Sexual Orientation and Gender Identity
+                            based descrimination charges for each state.
+                        </li>
+                        <li>
+                            <a
+                                href="https://williamsinstitute.law.ucla.edu/wp-content/uploads/Equality-Act-April-2019.pdf">
+                                LGBT
+                                People
+                                in the U.S.
+                                Not Protected by State
+                                Nondiscrimination Statutes</a>: Report published by UCLA Shool of Law Williams Institute
+                            (March 2019) indicating if states explicity protect the rights of diverse sexual
+                            orientations and
+                            gender
+                            identities in state legislature.
+                        </li>
+                    </ul>
+                    <h2>Notes</h2>
+                    <p>
+                        Based on our user research we identified that our audience is interested in data about
+                        incidents of decrimination in each state along with the laws of the land. Hence, we wanted to
+                        crossreference
+                        and visualize these 2 different datasets. But we could only find data on
+                        discrimination charges provided by U.S. EEOC for "Employment", we had to limit our visualization
+                        to the
+                        "Employment" sector.
+                    </p>
+                    <p>
+                        We also selected years 2017-2015 because this was the range for which size of community data was
+                        available from the Gallop Poll in the Williams Institute Report. Data for other (recent and
+                        historical years) is paid. The hope is that this visualization technique be applied to this data
+                        when it becomes freely available.
+                    </p>
+                    <h2>
+                        Legend
+                    </h2>
+                    <h3>
+                        Size
+                    </h3>
+                    <p>
+                        Each tile in the visualization represents the size of the LGBTQIA+ community in that state in
+                        the
+                        "Employment"
+                        sector aggregated over 2015-2017. Methological notes on how this was calculated can be found in
+                        the <a
+                            href="https://williamsinstitute.law.ucla.edu/wp-content/uploads/Equality-Act-April-2019.pdf">original
+                            report published by Williams Institue</a>.
+                    </p>
+                    <h3>
+                        Color + border
+                    </h3>
+                    <p>
+                        <span class="color-pal red"></span> Red shaded are for states that <b>DO NOT</b> explicitly
+                        protect
+                        communities in their legislature.<br>
+                        <span class="color-pal green"></span> Green shades are for states that explicitly protect
+                        communities in
+                        their legislature.
+                    </p>
+
+                    <h3>
+                        Text
+                    </h3>
+                    <p>
+                        States abbriviation.<br>
+                        Aggregated size of Community (2015-2017).<br>
+                        Aggregated decrimination charges as percent of community size (2015-2017).
+                        size of the community for that state, in employment.
+                    </p>
+                    <h2>Sized Grid Cartogram</h2>
+                    <p>
+                        'Joshua Tauberer recommends the use of cartograms in order to fairly represent demographic data,
+                        instead of the classic choropleth maps that "silence minorities"' - <a
+                            href="https://observablehq.com/@severo/grid-cartograms">Sylvain Lesage, April 2, 2018
+                            (Observable)</a>
+                        More on that <a
+                            href="https://medium.com/civic-tech-thoughts-from-joshdata/how-that-map-you-saw-on-538-under-represents-minorities-by-half-and-other-reasons-to-consider-a-4a98f89cbbb1">here</a>.
+                    </p>
+                </article>
+            </div>
+            <div class="col-sm">
+            </div>
+        </div>
+    </div>
+
+    <svg height="0" width="0">
+        <defs>
+            <filter id="sofGlowRed" height="300%" width="300%" x="-75%" y="-75%">
+                <!-- Thicken out the original shape -->
+                <feMorphology operator="dilate" radius="4" in="SourceAlpha" result="thicken" />
+
+                <!-- Use a gaussian blur to create the soft blurriness of the glow -->
+                <feGaussianBlur in="thicken" stdDeviation="10" result="blurred" />
+
+                <!-- Change the colour -->
+                <feFlood flood-color="#e74c3c" result="glowColor" />
+
+                <!-- Color in the glows -->
+                <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
+
+                <!--	Layer the effects together -->
+                <feMerge>
+                    <feMergeNode in="softGlow_colored" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+
+            </filter>
+
+            <filter id="sofGlowGreen" height="300%" width="300%" x="-75%" y="-75%">
+                <!-- Thicken out the original shape -->
+                <feMorphology operator="dilate" radius="4" in="SourceAlpha" result="thicken" />
+
+                <!-- Use a gaussian blur to create the soft blurriness of the glow -->
+                <feGaussianBlur in="thicken" stdDeviation="10" result="blurred" />
+
+                <!-- Change the colour -->
+                <feFlood flood-color="#27ae60" result="glowColor" />
+
+                <!-- Color in the glows -->
+                <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
+
+                <!--	Layer the effects together -->
+                <feMerge>
+                    <feMergeNode in="softGlow_colored" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+
+            </filter>
+        </defs>
+    </svg>
+
+    <svg width="100%" height="963" viewBox="0 0 1399 963" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="grid-cartograph-svg">
+            <g id="Group 1">
+                <g id="HI">
+                    <rect id="HI_2" x="179" y="859" width="7" height="7" rx="3.5" fill="#333333" />
+                </g>
+                <g id="FL">
+                    <rect id="FL_2" x="1041" y="675" width="115" height="116" rx="5" fill="#333333" />
+                </g>
+                <g id="TX">
+                    <rect id="TX_2" x="579" y="632" width="138" height="137" rx="5" fill="#333333" />
+                </g>
+                <g id="west coast">
+                    <g id="CA">
+                        <rect id="CA_2" x="64" y="449" width="253" height="253" rx="5" fill="#333333" />
+                    </g>
+                    <g id="OR">
+                        <rect id="OR_2" x="288" y="359" width="27" height="26" rx="5" fill="#333333" />
+                    </g>
+                    <g id="WA">
+                        <rect id="WA_2" x="267" y="267" width="47" height="47" rx="5" fill="#333333" />
+                    </g>
+                    <g id="AK">
+                        <rect id="AK_2" x="256" y="169" width="4" height="4" rx="2" fill="#333333" />
+                    </g>
+                </g>
+                <g id="next coast">
+                    <g id="ID">
+                        <rect id="ID_2" x="379" y="267" width="5" height="5" rx="2.5" fill="#333333" />
+                    </g>
+                    <g id="NV">
+                        <rect id="NV_2" x="384" y="459" width="21" height="21" rx="5" fill="#333333" />
+                    </g>
+                    <g id="UT">
+                        <rect id="UT_2" x="384" y="358" width="16" height="15" rx="5" fill="#333333" />
+                    </g>
+                    <g id="AZ">
+                        <rect id="AZ_2" x="384" y="566" width="38" height="38" rx="5" fill="#333333" />
+                    </g>
+                </g>
+                <g id="mid west 1">
+                    <g id="NM">
+                        <rect id="NM_2" x="484" y="564" width="11" height="10" rx="5" fill="#333333" />
+                    </g>
+                    <g id="CO">
+                        <rect id="CO_2" x="484" y="445" width="33" height="33" rx="5" fill="#333333" />
+                    </g>
+                    <g id="WY">
+                        <rect id="WY_2" x="488" y="357" width="1" height="2" rx="0.5" fill="#333333" />
+                    </g>
+                    <g id="MT">
+                        <rect id="MT_2" x="484" y="267" width="5" height="4" rx="2" fill="#333333" />
+                    </g>
+                </g>
+                <g id="mid west 2">
+                    <g id="OK">
+                        <rect id="OK_2" x="579" y="550" width="16" height="16" rx="5" fill="#333333" />
+                    </g>
+                    <g id="KS">
+                        <rect id="KS_2" x="579" y="474" width="13" height="12" rx="5" fill="#333333" />
+                    </g>
+                    <g id="NE">
+                        <rect id="NE_2" x="579" y="393" width="9" height="11" rx="4.5" fill="#333333" />
+                    </g>
+                    <g id="SD">
+                        <rect id="SD_2" x="579" y="332" width="4" height="3" rx="1.5" fill="#333333" />
+                    </g>
+                    <g id="ND">
+                        <rect id="ND_2" x="579" y="267" width="2" height="1" rx="0.5" fill="#333333" />
+                    </g>
+                </g>
+                <g id="mid 1">
+                    <g id="MN">
+                        <rect id="MN_2" x="657" y="258" width="28" height="28" rx="5" fill="#333333" />
+                    </g>
+                    <g id="IA">
+                        <rect id="IA_2" x="657" y="346" width="12" height="12" rx="5" fill="#333333" />
+                    </g>
+                    <g id="MO">
+                        <rect id="MO_2" x="657" y="398" width="28" height="28" rx="5" fill="#333333" />
+                    </g>
+                    <g id="AR">
+                        <rect id="AR_2" x="657" y="476" width="11" height="10" rx="5" fill="#333333" />
+                    </g>
+                    <g id="LA">
+                        <rect id="LA_2" x="657" y="536" width="19" height="19" rx="5" fill="#333333" />
+                    </g>
+                </g>
+                <g id="mid 2">
+                    <g id="MS">
+                        <rect id="MS_2" x="747" y="554" width="10" height="11" rx="5" fill="#333333" />
+                    </g>
+                    <g id="IL">
+                        <rect id="IL_2" x="747" y="397" width="70" height="70" rx="5" fill="#333333" />
+                    </g>
+                    <g id="WI">
+                        <rect id="WI_2" x="747" y="258" width="23" height="22" rx="5" fill="#333333" />
+                    </g>
+                </g>
+                <g id="mid 3">
+                    <g id="AL">
+                        <rect id="AL_2" x="879" y="585" width="16" height="15" rx="5" fill="#333333" />
+                    </g>
+                    <g id="TN">
+                        <rect id="TN_2" x="879" y="507" width="28" height="28" rx="5" fill="#333333" />
+                    </g>
+                    <g id="KY">
+                        <rect id="KY_2" x="879" y="440" width="18" height="17" rx="5" fill="#333333" />
+                    </g>
+                    <g id="IN">
+                        <rect id="IN_2" x="879" y="355" width="35" height="35" rx="5" fill="#333333" />
+                    </g>
+                    <g id="MI">
+                        <rect id="MI_2" x="879" y="258" width="49" height="47" rx="5" fill="#333333" />
+                    </g>
+                </g>
+                <g id="east next">
+                    <g id="GA">
+                        <rect id="GA_2" x="990" y="511" width="58" height="58" rx="5" fill="#333333" />
+                    </g>
+                    <g id="OH">
+                        <rect id="OH_2" x="990" y="385" width="63" height="63" rx="5" fill="#333333" />
+                    </g>
+                    <g id="PA">
+                        <rect id="PA_2" x="990" y="258" width="66" height="64" rx="5" fill="#333333" />
+                    </g>
+                    <g id="WV">
+                        <rect id="WV_2" x="1048" y="352" width="8" height="7" rx="3.5" fill="#333333" />
+                    </g>
+                </g>
+                <g id="east coast">
+                    <g id="SC">
+                        <rect id="SC_2" x="1095" y="622" width="21" height="21" rx="5" fill="#333333" />
+                    </g>
+                    <g id="NC">
+                        <rect id="NC_2" x="1095" y="550" width="50" height="51" rx="5" fill="#333333" />
+                    </g>
+                    <g id="VA">
+                        <rect id="VA_2" x="1095" y="487" width="42" height="42" rx="5" fill="#333333" />
+                    </g>
+                    <g id="DC">
+                        <rect id="DC_2" x="1137" y="457" width="4.5" height="4.5" rx="2.25" fill="#333333" />
+                    </g>
+                    <g id="MD">
+                        <rect id="MD_2" x="1123" y="389" width="33" height="34" rx="5" fill="#333333" />
+                    </g>
+                    <g id="DE">
+                        <rect id="DE_2" x="1186" y="352" width="6" height="5" rx="2.5" fill="#333333" />
+                    </g>
+                    <g id="NJ">
+                        <rect id="NJ_2" x="1139" y="273" width="44" height="43" rx="5" fill="#333333" />
+                    </g>
+                </g>
+                <g id="NY">
+                    <rect id="NY_2" x="1118" y="129" width="124" height="123" rx="5" fill="#333333" />
+                </g>
+                <g id="what">
+                    <g id="CT">
+                        <rect id="CT_2" x="1268" y="305" width="17" height="17" rx="5" fill="#333333" />
+                    </g>
+                    <g id="RI">
+                        <rect id="RI_2" x="1317" y="262" width="5" height="5" rx="2.5" fill="#333333" />
+                    </g>
+                    <g id="MA">
+                        <rect id="MA_2" x="1287" y="184" width="47" height="47" rx="5" fill="#333333" />
+                    </g>
+                    <g id="NH">
+                        <rect id="NH_2" x="1327" y="145" width="7" height="7" rx="3.5" fill="#333333" />
+                    </g>
+                    <g id="VT">
+                        <rect id="VT_2" x="1269" y="125" width="1.9" height="1.9" rx="0.95" fill="#333333" />
+                    </g>
+                    <g id="ME">
+                        <rect id="ME_2" x="1327" y="97" width="7" height="7" rx="3.5" fill="#333333" />
+                    </g>
+                </g>
+            </g>
+        </g>
+    </svg>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-10">
+                <h3>% rate of discrimination charges filed</h3>
+                <p>This measure is calculated by dividing the sum total number of descrimination charges in 2015, 2016,
+                    and 2017; by the aggregated size of the community for those years.</p>
+                <!-- <ul id="statesRef">
+                </ul> -->
+                <div id="graphic"></div>
+            </div>
+            <div class="col-sm">
+            </div>
+        </div>
+    </div>
+    <footer>
+        Created by <a href="https://www.linkedin.com/in/ijouwu/">Aimee Wu</a>, <a
+            href="https://www.linkedin.com/in/prsdt">Prasad Thakur, <a
+                href="https://www.linkedin.com/in/srishti-tayal-9793217a/">Srishti Tayal</a>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="./scripts/final-2.js"></script>
+    <!-- <script src="./scripts/final-histo.js"></script> -->
+</body>
+
+</html>
