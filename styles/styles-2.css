@@ -1,19 +1,103 @@
+.line-chip {
+    margin : 15px 0px;
+    display: inline-block;
+    float  : left;
+}
+
+.line {
+    margin : 20px 18px;
+    display: inline-block;
+}
+
+#graphic {
+    /* background-color: lightgrey; */
+}
+
+div.tooltip {
+    position  : absolute;
+    text-align: center;
+    padding   : 2px;
+    font      : 24px;
+    font-family:
+        georgia,
+        helvetica,
+        'Times New Roman',
+        Times,
+        serif !important;
+    background    : white;
+    border        : 0px;
+    pointer-events: none;
+}
+
 #finalViz {
-    border: 1px solid lightgrey;
+    border      : 1px solid lightgrey;
+    border-left : 0px;
+    border-right: 0px;
 }
 
 .rect-stroke {
-    stroke-width: 3px;
+    stroke-width: 1px;
 
 }
 
-.green-rect {
-    stroke: #13552e;
+.bar-rect-stroke {
+    /* stroke-width: 2px; */
+
 }
 
-.red-rect {
-    stroke          : #4d1812;
-    stroke-dasharray: 5 3;
+
+
+g.state-tile-ctr rect.green-rect {
+    stroke   : black;
+    /* stroke: #13552e; */
+}
+
+g.green-rect rect {
+    /* stroke: #13552e; */
+    stroke   : black;
+
+}
+
+g.state-tile-ctr rect.red-rect {
+    stroke             : black;
+    /* stroke          : #4d1812;
+    stroke-dasharray   : 5 3; */
+}
+
+g.red-rect rect {
+    stroke             : black;
+    /* stroke          : #4d1812;
+    stroke-dasharray   : 5 3; */
+
+}
+
+.red {
+    background-color   : white;
+    border             : 1px solid black;
+    /* background-color: #c0392b;
+    border             : 4px dashed #750c00; */
+}
+
+.green {
+    background-color   : darkgrey;
+    border             : 1px solid black;
+    /* background-color: #27ae60;
+    border             : 4px solid #13552e;*/
+}
+
+.bar-red {
+    /* background-color: #c0392b; */
+    background-color   : white;
+    border             : 1px solid black;
+
+    /* border          : 3px dashed #750c00; */
+}
+
+.bar-green {
+    /* background-color: #27ae60; */
+    background-color   : darkgrey;
+    border             : 1px solid black;
+    /* border          : 1px solid #13552e; */
 }
 
 #statesRef {
@@ -55,6 +139,12 @@ footer a:hover {
     border-radius: 8px;
 }
 
+.bar-color-pal {
+    width  : 80px;
+    height : 30px;
+    display: inline-block;
+}
+
 .color-grad {
     width  : 200px;
     height : 20px;
@@ -69,18 +159,9 @@ footer a:hover {
     background: linear-gradient(to right, #ffccc7, #b51200);
 }
 
-.red {
-    background-color: #c0392b;
-    border          : 4px dashed #750c00;
-}
-
-.green {
-    background-color: #27ae60;
-    border          : 4px solid #13552e;
-}
 
 .state-tile-ctr {
-    cursor: none;
+    /* cursor: none; */
 }
 
 .darkmode {

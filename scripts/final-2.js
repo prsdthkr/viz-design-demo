@@ -56,7 +56,11 @@ const setAtt = function (ABBR, key, value) {
     if (!ABBR) return;
     selectStateRect(ABBR).attr(key, value);
 };
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 window.onload = function () {
+
     d3.json('data/states.json', function (sd) {
         console.log('states', Object.entries(sd));
 
@@ -192,12 +196,10 @@ window.onload = function () {
 
             var xFunc = d3.scale.linear()
                 .range([0, width])
-                .domain([0, d3.max(descriminationData, function (state) {
-                    return state['Percent Incidents'];
-                })]);
+                .domain([0, 4]);
 
             var yFunc = d3.scale.ordinal()
-                .rangeRoundBands([height, 0], .1)
+                .rangeRoundBands([height, 0], 0)
                 .domain(descriminationData.map(function (state) {
                     return state['State'];
                 }));
@@ -211,19 +213,30 @@ window.onload = function () {
             //make y axis to show bar names
             var yAxis = d3.svg.axis()
                 .scale(yLabelFunc)
-                //no tick marks
                 .tickSize(1)
                 .orient("left");
 
-            var gy = svg.append("g")
+            // add the x Axis
+            let xAxis = d3.svg.axis()
+                .scale(xFunc)
+                .tickValues([0, 1, 2, 3, 4, 5])
+                .tickSize(20, 1)
+                .tickFormat((each) => d3.format(".0%")(each / 100))
+                .orient('top')
+
+            svg.append("g")
+                .call(xAxis);
+
+            svg.append("g")
                 .attr("class", "y axis")
                 .call(yAxis)
-
+            svg.selectAll(".tick line").attr("stroke", "black").attr("stroke-dasharray", "2,2");
             var bars = svg.selectAll(".bar")
                 .data(descriminationData)
                 .enter()
                 .append("g")
                 .attr('fill', (state) => getFill(state))
+                .attr('class', (element) => ((element.Legislation === 'Yes' ? 'green-rect' : 'red-rect') + ' bar-rect-stroke'))
 
             //append rects
             bars.append("rect")
@@ -236,7 +249,7 @@ window.onload = function () {
                 .attr("x", 0)
                 .attr("width", function (d) {
                     return xFunc(d['Percent Incidents']);
-                });
+                })
 
             //add a value label to the right of each bar
             bars.append("text")
@@ -263,23 +276,33 @@ window.onload = function () {
 };
 
 function getFill(element) {
-    return element.Legislation === 'Yes' ? '#27ae60' : '#c0392b';
+    // return element.Legislation === 'Yes' ? '#27ae60' : '#c0392b';
+    return element.Legislation === 'Yes' ? 'darkgrey' : 'white';
 }
 function getDarkFill(element) {
-    return element.Legislation === 'Yes' ? '#13552e' : '#4d1812';
+    // return element.Legislation === 'Yes' ? '#13552e' : '#4d1812';
+    return element.Legislation === 'Yes' ? 'black' : 'black';
 }
 
 
 function handleMouseOverRect(d, i) {
-
-    if (d && d.Legislation === 'No') {
-        let filter = 'sofGlowRed';
-        this && this.setAttribute('filter', 'url(#' + filter + ')');
-    }
+    div.transition()
+        .duration(0)
+        .style("opacity", 1);
+    div.html(d['State'])
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY - 28) + "px");
+    // if (d && d.Legislation === 'No') {
+    //     let filter = 'sofGlowRed';
+    //     this && this.setAttribute('filter', 'url(#' + filter + ')');
+    // }
 }
 
 function handleMouseOutRect(d, i) {
-    this && this.removeAttribute('filter');
+    div.transition()
+        .duration(0)
+        .style("opacity", 0);
+    // this && this.removeAttribute('filter');
 }
 
 
