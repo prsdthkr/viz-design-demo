@@ -142,7 +142,7 @@ window.onload = function () {
                 //CA
                 selectStateG(ABBR)
                     .append("text")
-                    .attr('fill', 'black')
+                    .attr('fill', getDarkFill(element))
                     .attr('y', stateAbrY)
                     .attr('x', stateAbrX)
                     .attr('font-size', abrFontSize)
@@ -151,27 +151,13 @@ window.onload = function () {
                 //1.19M
                 selectStateG(ABBR)
                     .append("text")
-                    .attr('fill', 'black')
+                    .attr('fill', getDarkFill(element))
                     .attr('y', communitySizeY)
                     .attr('x', communitySizeX)
                     .attr('font-size', communityFontSize)
                     .text(nFormatter(communitySize, 2));
 
-                //27.67%
-                // selectStateG(ABBR)
-                //     .append("text")
-                //     .attr('fill', 'black')
-                //     .attr('y', percentY)
-                //     .attr('x', percentX)
-                //     .attr('font-size', percentFontSize)
-                //     .text(percentInc.toFixed(2) + '%');
 
-                // var greenScale = d3.scale.linear().domain([0.054285714, 1.959574468])
-                // .range(["#13532e", "#2ecc71"]); //dark green > light
-                // var redScale = d3.scale.linear().domain([0.157777778, 3.443589744])
-                // .range(["#ffccc7", "#b51200"]); //light red > dark
-                // const colorScale = element.Legislation === 'No' ? redScale : greenScale;
-                // setAtt(ABBR, 'fill', colorScale(percentInc));
                 setAtt(ABBR, 'fill', getFill(element));
                 setAtt(ABBR, 'class', (element.Legislation === 'Yes' ? 'green-rect' : 'red-rect') + ' rect-stroke');
             });
@@ -269,19 +255,27 @@ window.onload = function () {
                 .attr('fill', 'black');
 
         })
+        // var finalViz = svgPanZoom('#finalViz', {
+        //     minZoom: 1,
+        //     maxZoom: 10
+        // });
     });
 };
 
 function getFill(element) {
     return element.Legislation === 'Yes' ? '#27ae60' : '#c0392b';
 }
+function getDarkFill(element) {
+    return element.Legislation === 'Yes' ? '#13552e' : '#4d1812';
+}
+
 
 function handleMouseOverRect(d, i) {
-    let filter = 'sofGlowRed';
-    if (d && d.Legislation === 'Yes') {
-        filter = 'sofGlowGreen';
+
+    if (d && d.Legislation === 'No') {
+        let filter = 'sofGlowRed';
+        this && this.setAttribute('filter', 'url(#' + filter + ')');
     }
-    this && this.setAttribute('filter', 'url(#' + filter + ')');
 }
 
 function handleMouseOutRect(d, i) {
