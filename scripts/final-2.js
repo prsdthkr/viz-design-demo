@@ -289,7 +289,7 @@ function handleMouseOverRect(d, i) {
     div.transition()
         .duration(0)
         .style("opacity", 1);
-    div.html(d['State'])
+    div.html(d['State'] + '<br>' + nFormatter(d['Community'], 2) + ' people are ' + (d['Legislation'] === 'No' ? 'not legally protected' : 'are legally protected'))
         .style("left", (d3.event.pageX) + "px")
         .style("top", (d3.event.pageY - 28) + "px");
     // if (d && d.Legislation === 'No') {
