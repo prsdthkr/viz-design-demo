@@ -142,6 +142,7 @@ window.onload = function () {
                     .on('mouseout', handleMouseOutRect)
                 selectStateRect(ABBR)
                     .attr('class', 'state-tile')
+                    .attr('stroke', 'black')
 
                 //CA
                 selectStateG(ABBR)
@@ -250,6 +251,7 @@ window.onload = function () {
                 .attr("width", function (d) {
                     return xFunc(d['Percent Incidents']);
                 })
+                .attr('stroke','black')
 
             //add a value label to the right of each bar
             bars.append("text")

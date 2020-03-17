@@ -48,24 +48,24 @@ div.tooltip {
 
 
 g.state-tile-ctr rect.green-rect {
-    stroke   : black;
+    /* stroke   : black; */
     /* stroke: #13552e; */
 }
 
 g.green-rect rect {
     /* stroke: #13552e; */
-    stroke   : black;
+    /* stroke   : black; */
 
 }
 
 g.state-tile-ctr rect.red-rect {
-    stroke             : black;
+    /* stroke             : black; */
     /* stroke          : #4d1812;
     stroke-dasharray   : 5 3; */
 }
 
 g.red-rect rect {
-    stroke             : black;
+    /* stroke             : black; */
     /* stroke          : #4d1812;
     stroke-dasharray   : 5 3; */
 
