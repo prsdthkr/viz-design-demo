@@ -1,4 +1,4 @@
-My experiments with D3 for information visualization class project and demo.
+This repo houses my experiments with D3 (mostly inspired by other's work 🧪) for information visualization class project and demo.
 
 
 # [Final project 🔗](http://prasadthakur.info/viz-design-demo/final-2.html) 
